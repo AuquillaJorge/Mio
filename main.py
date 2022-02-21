@@ -1,5 +1,6 @@
 from fastapi import FastAPI,Request,HTTPException
 import pickle
+from fastapi.responses import JSONResponse 
 
 app = FastAPI()
 posts = []
@@ -24,7 +25,7 @@ async def get_home_price(request:Request):
            formdata["mes"]    
        ]]
        price=model.predict(hause_attr).tolist()[0]
-       return {'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price}
+       return JSONResponse({'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price})
 
 
 @app.post("/api/predict1")
@@ -36,7 +37,7 @@ async def get_home_price(request:Request):
            formdata["mes"]    
        ]]
        price=model1.predict(hause_attr).tolist()[0]
-       return {'Anio':formdata["anio"],'Mes':formdata["mes"],'prediccion': "{price}"}
+       return JSONResponse({'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price})
 
 
 @app.get('/posts')
