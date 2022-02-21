@@ -36,7 +36,7 @@ async def get_home_price(request:Request):
            formdata["mes"]    
        ]]
        price=model1.predict(hause_attr).tolist()[0]
-       return {'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price}
+       return {'Anio':formdata["anio"],'Mes':formdata["mes"],'prediccion':""+price+""}
 
 
 @app.get('/posts')
