@@ -7,7 +7,7 @@ posts = []
 @app.on_event("startup")
 def load_model():
     global model
-    model =pickle.load(open("ml_model_regression.pkl","rb"))
+    model =pickle.load(open("ml_model_GROCERY.pkl","rb"))
     
 @app.get("/api/author")
 def index():
@@ -25,6 +25,9 @@ async def get_home_price(request:Request):
        ]]
        price=model.predict(hause_attr).tolist()[0]
        return {'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price}
+
+
+
 
 
 
