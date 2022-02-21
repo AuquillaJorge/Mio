@@ -25,19 +25,23 @@ async def get_home_price(request:Request):
            formdata["mes"]    
        ]]
        price=model.predict(hause_attr).tolist()[0]
+       parseo = str(price)
        return JSONResponse({'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price})
 
 
 @app.post("/api/predict1")
 async def get_home_price(request:Request):
        model1=pickle.load(open("ml_model_GROCERY1.pkl","rb"))
+       #Convertir a cadena
+       
        formdata = await request.form()
        hause_attr=[[
            formdata["anio"],
            formdata["mes"]    
        ]]
        price=model1.predict(hause_attr).tolist()[0]
-       return JSONResponse({'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price})
+       parseo = str(price)
+       return JSONResponse({'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":parseo})
 
 
 @app.get('/posts')
