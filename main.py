@@ -27,8 +27,16 @@ async def get_home_price(request:Request):
        return {'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price}
 
 
-
-
+@app.post("/api/predict1")
+async def get_home_price(request:Request):
+       model1=pickle.load(open("ml_model_GROCERY1.pkl","rb"))
+       formdata = await request.form()
+       hause_attr=[[
+           formdata["anio"],
+           formdata["mes"]    
+       ]]
+       price=model1.predict(hause_attr).tolist()[0]
+       return {'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price}
 
 
 @app.get('/posts')
