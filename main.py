@@ -1,7 +1,8 @@
-from fastapi import FastAPI,Request
+from fastapi import FastAPI,Request,HTTPException
 import pickle
 
 app = FastAPI()
+posts = []
 
 @app.on_event("startup")
 def load_model():
@@ -10,10 +11,9 @@ def load_model():
     
 @app.get("/api/author")
 def index():
-    return {
-        
-        "msg" :"Machine Learning",
-        "author": "Ing. Danny Jaramillo"
+    return {        
+        "msg" :"Proyecto de Machine Learning : Analisis de Ventas",
+        "author": "Jorge Luis Auquilla"
     }
 
 @app.post("/api/predict")
@@ -25,3 +25,16 @@ async def get_home_price(request:Request):
        ]]
        price=model.predict(hause_attr).tolist()[0]
        return {'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price}
+
+
+
+@app.get('/posts')
+def get_posts():
+    return posts
+
+@app.get('/posts/{post_id}')
+def get_post(post_id: str):
+    for post in posts:
+        if post["id"] == post_id:
+            return post
+    raise HTTPException(status_code=404, detail="Item not found")
