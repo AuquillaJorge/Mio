@@ -32,8 +32,7 @@ async def get_home_price(request:Request):
 @app.post("/api/predict1")
 async def get_home_price(request:Request):
        model1=pickle.load(open("ml_model_GROCERY1.pkl","rb"))
-       #Convertir a cadena
-       
+       #Convertir a cadena       
        formdata = await request.form()
        hause_attr=[[
            formdata["anio"],
