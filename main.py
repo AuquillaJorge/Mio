@@ -26,7 +26,7 @@ async def get_home_price(request:Request):
        ]]
        price=model.predict(hause_attr).tolist()[0]
        parseo = str(price)
-       return JSONResponse({'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":price})
+       return JSONResponse({'Anio':formdata["anio"],'Mes':formdata["mes"],"prediccion":parseo})
 
 
 @app.post("/api/predict1")
